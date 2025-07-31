@@ -1,0 +1,1 @@
+python -m pytest -v --cov=myFunctions --cov-report html ./mytests.py
