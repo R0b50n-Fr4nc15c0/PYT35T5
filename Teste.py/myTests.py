@@ -1,4 +1,5 @@
-from myFunctions import soma, produto ,equacao_parabolica
+from myFunctions import soma, produto, equacao_parabolica, calculate_average, is_prime, read_file_content, count_word_occurrences, factorial, reverse_string, get_environment_variable, divide, flatten_list, authenticate_user
+import pytest
 # caminho feliz
 
 # -------Adição-------
@@ -139,3 +140,131 @@ def test_equacao_parabolica_resultado_complexo():
     )
     assert resultado == esperado
 
+#---------Calcular a media-----------
+
+def test_threeint():
+    numbers = 6, 8, 7
+    esperado = 7
+    resultado = calculate_average(numbers)
+    assert esperado == resultado
+
+def test_fourint():
+    numbers = 4, 7, 9, 9
+    esperado = 7.25
+    resultado = calculate_average(numbers)
+    assert esperado == resultado
+
+def test_int_float_float():
+    numbers = 6, 9.5, 8.5
+    esperado = 8
+    resultado = calculate_average(numbers)
+    assert esperado == resultado
+
+#--------Numero primo--------
+
+def test_N_Primo():
+    n = 5
+    esperado = True
+    resultado = is_prime(n)
+    assert esperado == resultado
+
+def test_N_Primo2():
+    n = 9
+    esperado = True
+    resultado = is_prime(n)
+    assert esperado == resultado
+
+def test_N_Primo3():
+    n = -4
+    esperado = False
+    resultado = is_prime(n)
+    assert esperado == resultado
+
+def test_N_Primo4():
+    n = 0
+    esperado = False
+    resultado = is_prime(n)
+    assert esperado == resultado
+
+def test_N_Primo5():
+    n = 27
+    esperado = False
+    resultado = is_prime(n)
+    assert esperado == resultado
+
+#------------Ler arquivo------------
+
+def test_read_file(tmp_path):
+    test_file = tmp_path / "teste.txt"
+    esperado = "Boa tarde fulano."
+    test_file.write_text(esperado,encoding="utf-8")
+    resultado = read_file_content(test_file)
+    assert esperado == resultado
+    
+#---------contagem de palavras---------
+
+def test_count_word():
+    text = "Bom dia, boa tarde ou boa noite"
+    word = "boa"
+    esperado = 2
+    resultado = count_word_occurrences(text, word)
+    assert esperado == resultado
+
+#-------------Fatorial--------------
+
+def test_factorial():
+    n = 0
+    esperado = 1
+    resultado = factorial(n)
+    assert esperado == resultado
+
+def test_factorial2():
+    n = 1
+    esperado = 1
+    resultado = factorial(n)
+    assert esperado == resultado
+
+#-----------string reversa------------
+
+def test_string_reversa():
+    s = "anotaram a data da maratona"
+    esperado = "anotaram ad atad a maratona"
+    resultado = reverse_string(s)
+    assert esperado == resultado
+
+#------------get_variable-------------
+
+def test_get_environment_variable():
+    var_name = ["Home"]
+    esperado = "Home"
+    resultado = get_environment_variable(var_name)
+    assert esperado == resultado
+
+#--------------divisão----------------
+
+def test_divisao():
+    a, b = 8, 4
+    esperado = 2
+    resultado = divide(a, b)
+    assert esperado == resultado
+
+def test_divisao2():
+    a, b = 54, 8
+    esperado = 6.75
+    resultado = divide(a, b)
+    assert esperado == resultado
+#---------------flatten_list---------------
+
+def test_flatten():
+    nested_list = [[1,2], [3,4,5], [6, 7, 8, 9]]
+    esperado = [1,2,3,4,5,6,7,8,9]
+    resultado = flatten_list(nested_list)
+    assert esperado == resultado
+
+#----------Auteticação de usuario----------
+
+def test_Autenticar():
+    username, password = "admin", "1234"
+    esperado = True
+    resultado = authenticate_user(username, password)
+    assert esperado == resultado
